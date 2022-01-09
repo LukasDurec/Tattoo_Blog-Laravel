@@ -22,9 +22,9 @@
         <div class="card card-primary">
 
             <!-- form start -->
-            <form action="{{route("tag.update",$tag->id)}}" method="post">
-                {{csrf_field()}}
-                {{method_field("PUT")}}
+            <form action="{{route("tags.edit",$tag->id)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <div class="card-body">
 
                     @if( count($errors)>0)
@@ -40,20 +40,18 @@
                                 <input type="text" class="form-control" name="tagname" id="tag-name" value="{{$tag->name}}">
                             </div>
 
-                            <div class="form-group">
-                                <label for="title">Tag Slug</label>
-                                <input type="text" class="form-control" id="tagtlug"name="tagslug" value="{{$tag->slug}}">
-                            </div>
                         </div>
                     </div>
 
                     <div>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a type="button" href="{{route("tag.index")}}" class="btn btn-warning">Back</a>
+                        <a type="button" href="{{route("tags.index")}}" class="btn btn-warning">Back</a>
                     </div>
 
                 </div>
+                @csrf
 
+                @method('PUT')
             </form>
 
         </div>

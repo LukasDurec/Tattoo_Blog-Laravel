@@ -57,9 +57,9 @@
                                         <tr>
                                             <td>{{$loop->index+1}}</td>
                                             <td>{{$tag->name}}</td>
-                                            <td><a href="{{route("tags.edit",$tag->tag_id)}}"><span class="fas fa-edit"></span></a></td>
+                                            <td><a href="{{route("tags.edit",$tag->id)}}"><span class="fas fa-edit"></span></a></td>
                                             <td>
-                                                <form id='delete-form-{{$tag->tag_id}}' method="post" action="{{route("tags.destroy",$tag->tag_id)}}" style="display: none">
+                                                <form id='delete-form-{{$tag->id}}' method="post" action="{{route("tags.destroy",$tag->id)}}" style="display: none">
                                                     {{csrf_field()}}
                                                     {{method_field('DELETE')}}
                                                 </form>
@@ -67,7 +67,7 @@
                                                 <a href="" onclick="
                                                     if (confirm('Are you sure u want to delete this gorgeous tag?')){
                                                     event.preventDefault();
-                                                    document.getElementById('delete-form-{{$tag->tag_id}}').submit();
+                                                    document.getElementById('delete-form-{{$tag->id}}').submit();
                                                     }else{
                                                     event.preventDefault();}"
                                                 ><span class="fas fa-trash"></span></a></td>
