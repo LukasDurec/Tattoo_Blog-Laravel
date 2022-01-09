@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +18,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//User cast
+Route::get('/',[UHomeController::class,'index'])->name("index");
+
 Route::get('/', function () {
     return view('user/blog');
 });
 
-Route::get('admin/home',function (){
-    return view('admin/home');
-    })->name("admin.home");
+//Admin cast
+
+//POST
+Route::resource('admin/posts',PostController::class);
+//TAG
+Route::resource('admin/tags',TagController::class);
+//Gallery
+Route::resource('admin/gallery',GalleryController::class);
+//HOME
+Route::get('admin/home',[HomeController::class,'index'])->name("admin.home");
+//USER
+Route::resource('admin/users',UserController::class);

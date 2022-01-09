@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->string('image');
             $table->integer("views");
-            $table->timestamp('created_at');
+            $table->timestamps();
         });
     }
 

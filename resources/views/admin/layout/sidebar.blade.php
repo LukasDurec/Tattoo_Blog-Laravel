@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="" class="nav-link ">
+                    <a href="{{route('gallery.index')}}" class="nav-link ">
                         <i class="nav-icon fas fa-images"></i>
                         <p>
                             Gallery
@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="" class="nav-link">
+                    <a href=""{{route('users.index')}}"" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Users
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="" class="nav-link ">
+                    <a href="{{route('posts.index')}}" class="nav-link ">
                         <i class="nav-icon fas fa-blog"></i>
                         <p>
                             Posts
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="" class="nav-link ">
+                    <a href="{{route('tags.index')}}" class="nav-link ">
                         <i class="nav-icon fas fa-hashtag"></i>
                         <p>
                             Tags

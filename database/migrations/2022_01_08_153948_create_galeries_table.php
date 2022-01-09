@@ -19,7 +19,7 @@ class CreateGaleriesTable extends Migration
             $table->string('subtitle');
             $table->string('autor');
             $table->integer('posted_by');
-            $table->timestamp('created_at');
+            $table->timestamps();
         });
     }
 
