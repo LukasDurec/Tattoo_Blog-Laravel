@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\post;
+use App\Models\tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view("admin.posts.show");
+        $posts = post::all();
+        return view("admin.posts.show",compact("posts"));
     }
 
     /**
@@ -24,7 +27,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $tags = tag::all();
+        return view("admin.posts.create",compact("tags"));
     }
 
     /**
@@ -35,7 +39,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            "title"=>"required",
+            "subtitle"=>"required",
+            "body"=>"required",
+           // "image"=>"required",
+
+        ]);
+
+        $post = new post();
+        //$post->image = $imageName;
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->content = $request->body;
+        $post->created_at = now();
+        $post ->save();
+       // $post->tags()->sync($request->tags);
+
+        return redirect(route("posts.index"));
     }
 
     /**
@@ -57,7 +78,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = post::where('id',$id)->first();
+        return view("admin.posts.edit",compact("post"));
     }
 
     /**
@@ -69,8 +91,26 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            "title"=>"required",
+            "subtitle"=>"required",
+            "body"=>"required",
+            // "image"=>"required",
+
+        ]);
+
+        $post = post::find($id);
+        //$post->image = $imageName;
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->content = $request->body;
+        $post->created_at = now();
+        $post ->save();
+        // $post->tags()->sync($request->tags);
+
+        return redirect(route("posts.index"));
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -80,6 +120,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        post::where("id",$id)->delete();
+        return redirect()->back();
     }
 }

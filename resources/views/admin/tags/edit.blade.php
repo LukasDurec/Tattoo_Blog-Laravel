@@ -22,7 +22,7 @@
         <div class="card card-primary">
 
             <!-- form start -->
-            <form action="{{route("tags.edit",$tag->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route("tags.update",$tag->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -49,9 +49,7 @@
                     </div>
 
                 </div>
-                @csrf
 
-                @method('PUT')
             </form>
 
         </div>

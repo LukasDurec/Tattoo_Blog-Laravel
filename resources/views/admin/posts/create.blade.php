@@ -30,8 +30,8 @@
             </div>
 
             <!-- form start -->
-            <form role="form" action="" method="post" enctype="multipart/form-data">
-                {{csrf_field()}}
+            <form role="form" action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -43,25 +43,23 @@
 
                             <div class="form-group">
                                 <label for="title">Post Subtitle</label>
-                                <input type="text" class="form-control" id="subtitle"name="subtitle" placeholder="Subtitle">
+                                <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Subtitle">
                             </div>
+
+                           <!-- Obrazok
 
                             <div class="form-group">
                                 <label for="exampleInputFile">Title image</label>
                                 <input type="file" class="form-control-file" id="image" name="image">
                             </div>
 
-
+                            -->
 
                         </div>
 
                         <div class="col-md-6">
 
-                            <div class="form-group">
-                                <label for="title">Post Slug</label>
-                                <input type="text" class="form-control" id="Postlug"name="slug" placeholder="Slug">
-                            </div>
-
+                            <!-- Tags
 
                             <div class="form-group">
                                 <label>Select tags</label>
@@ -69,6 +67,8 @@
 
                                 </select>
                             </div>
+
+                            -->
 
 
 
@@ -84,7 +84,7 @@
 
                     <div>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a type="button" href="" class="btn btn-warning">Back</a>
+                        <a type="button" href="{{route("posts.index")}}" class="btn btn-warning">Back</a>
                     </div>
 
                 </div>

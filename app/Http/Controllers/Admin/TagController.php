@@ -86,7 +86,6 @@ class TagController extends Controller
         ]);
         $tag = tag::find($id);
         $tag->name = $request->tagname;
-        $tag->slug = $request->tagslug;
         $tag->save();
 
         return redirect(route("tags.index"));
