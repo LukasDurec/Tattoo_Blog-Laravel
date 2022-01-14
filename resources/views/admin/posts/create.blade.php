@@ -59,16 +59,16 @@
 
                         <div class="col-md-6">
 
-                            <!-- Tags
 
                             <div class="form-group">
                                 <label>Select tags</label>
                                 <select class="select2" multiple="multiple" data-placeholder="Tag" name="tags[]" style="width: 100%;">
-
+                                    @foreach($tags as $tag)
+                                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
-                            -->
 
 
 

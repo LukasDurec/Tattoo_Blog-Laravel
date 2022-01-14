@@ -54,7 +54,8 @@ class PostController extends Controller
         $post->content = $request->body;
         $post->created_at = now();
         $post ->save();
-       // $post->tags()->sync($request->tags);
+        $post->tags()->sync($request->tags);
+
 
         return redirect(route("posts.index"));
     }
@@ -78,8 +79,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = post::where('id',$id)->first();
-        return view("admin.posts.edit",compact("post"));
+        $post = post::with('tags')->where('id',$id)->first();
+        $tags = tag::all();
+        return view("admin.posts.edit",compact("post","tags"));
+
     }
 
     /**
@@ -106,7 +109,7 @@ class PostController extends Controller
         $post->content = $request->body;
         $post->created_at = now();
         $post ->save();
-        // $post->tags()->sync($request->tags);
+        $post->tags()->sync($request->tags);
 
         return redirect(route("posts.index"));
     }

@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class post extends Model
 {
-    use HasFactory;
+    public function tags()
+    {
+
+        return $this->belongsToMany('App\Models\tag','post_tags');
+
+
+    }
 }
