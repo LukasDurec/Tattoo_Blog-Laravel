@@ -9,9 +9,10 @@ class post extends Model
 {
     public function tags()
     {
-
         return $this->belongsToMany('App\Models\tag','post_tags');
-
-
+    }
+    public function getRouteKey()
+    {
+        return 'id';
     }
 }

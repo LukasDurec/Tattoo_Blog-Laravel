@@ -1,6 +1,6 @@
 @extends("user.app")
 
-@section('title','Blog')
+@section('title',"#"($tag->name))
 @section('main-content')
     <div class="container">
         <div class="row">
@@ -26,5 +26,6 @@
     </div>
     <hr>
 @endsection
+
 
 

@@ -46,19 +46,14 @@
                                 <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Subtitle">
                             </div>
 
-                           <!-- Obrazok
-
                             <div class="form-group">
                                 <label for="exampleInputFile">Title image</label>
                                 <input type="file" class="form-control-file" id="image" name="image">
                             </div>
 
-                            -->
-
                         </div>
 
                         <div class="col-md-6">
-
 
                             <div class="form-group">
                                 <label>Select tags</label>
@@ -68,9 +63,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
-
-
 
                         </div>
 

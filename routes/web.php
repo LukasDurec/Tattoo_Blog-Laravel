@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\user\UHomeController;
+use App\Http\Controllers\user\UPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 //User cast
 Route::get('/',[UHomeController::class,'index'])->name("index");
+Route::get('/blog',[UHomeController::class,'blog'])->name("blog");
+Route::get('/post/{post?}',[UPostController::class,'post'])->name("post");
 
-Route::get('/', function () {
-    return view('user/blog');
-});
+Route::get('/blog/tag/{tag?}',[UHomeController::class,'tag'])->name("tag");
 
 //Admin cast
 

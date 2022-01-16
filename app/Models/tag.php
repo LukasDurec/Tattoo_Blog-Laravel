@@ -9,7 +9,12 @@ class tag extends Model
 {
     public function posts()
     {
-        return $this->belongsToMany('App\Models\post','post_tags');
+        return $this->belongsToMany('App\Models\post','post_tags')->orderBy('created_at','DESC');
     }
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
     use HasFactory;
 }

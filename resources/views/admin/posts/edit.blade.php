@@ -48,11 +48,11 @@
                             </div>
 
 
-                           <!-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="exampleInputFile">Title image</label>
+                                <p> If you want to change image choose another image file from your disk</p>
                                 <input type="file" class="form-control-file" id="image" name="image">
                             </div>
-                            -->
 
                         </div>
 
