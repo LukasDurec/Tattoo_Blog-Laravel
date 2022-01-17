@@ -1,6 +1,6 @@
 @extends("user.app")
 
-@section('title',"#"($tag->name))
+@section('title',($tag->name))
 @section('main-content')
     <div class="container">
         <div class="row">

@@ -22,10 +22,12 @@ use Illuminate\Support\Facades\Route;
 
 //User cast
 Route::get('/',[UHomeController::class,'index'])->name("index");
+
 Route::get('/blog',[UHomeController::class,'blog'])->name("blog");
 Route::get('/post/{post?}',[UPostController::class,'post'])->name("post");
-
 Route::get('/blog/tag/{tag?}',[UHomeController::class,'tag'])->name("tag");
+
+Route::get('/gallery',[UHomeController::class,'gallery'])->name("gallery");
 
 //Admin cast
 
