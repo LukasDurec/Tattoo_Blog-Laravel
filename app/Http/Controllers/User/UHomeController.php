@@ -23,7 +23,7 @@ class UHomeController extends Controller
 
     public function tag(tag $tag)
     {
-        $posts = $tag->posts();
+        $posts = $tag->posts;
         return view('user.blog',compact('posts','tag'));
     }
 

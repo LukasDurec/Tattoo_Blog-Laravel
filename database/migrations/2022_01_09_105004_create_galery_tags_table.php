@@ -13,9 +13,12 @@ class CreateGaleryTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('galery_tags', function (Blueprint $table) {
-            $table->integer("galery_id");
-            $table->integer("tag_id");
+        Schema::create('gallery_tags', function (Blueprint $table) {
+            $table->integer("gallery_id")->unsigned();
+            $table->integer("tag_id")->unsigned();
+            $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+
         });
     }
 
@@ -26,6 +29,6 @@ class CreateGaleryTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galery_tags');
+        Schema::dropIfExists('gallery_tags');
     }
 }

@@ -13,12 +13,13 @@ class CreateGaleriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('galeries', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->increments("id");
             $table->string('title');
             $table->string('subtitle');
-            $table->string('autor');
-            $table->integer('posted_by');
+            $table->string('author');
+            $table->integer('posted_by')->nullable();
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateGaleriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galeries');
+        Schema::dropIfExists('galleries');
     }
 }
