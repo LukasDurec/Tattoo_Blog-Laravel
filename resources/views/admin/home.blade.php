@@ -27,11 +27,11 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Welcome back!</h3>
+                    <h3 class="card-title">U are logged in!</h3>
 
                 </div>
                 <div class="card-body">
-                    Start creating your amazing application!
+                    Welcome back {{Auth::user()->name}}
                 </div>
                 <!-- /.card-body -->
 

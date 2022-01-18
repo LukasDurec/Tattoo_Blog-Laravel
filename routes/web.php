@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\user\UHomeController;
 use App\Http\Controllers\user\UPostController;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +41,7 @@ Route::resource('admin/gallery',GalleryController::class);
 Route::get('admin/home',[HomeController::class,'index'])->name("admin.home");
 //USER
 Route::resource('admin/users',UserController::class);
+
+Auth::routes();
+
+

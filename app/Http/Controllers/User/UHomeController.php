@@ -10,6 +10,11 @@ use App\Models\tag;
 
 class UHomeController extends Controller
 {
+    public function __construct()
+    {
+
+    }
+
     public function index()
     {
         $posts = post::all();
