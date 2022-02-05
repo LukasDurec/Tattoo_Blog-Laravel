@@ -29,6 +29,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    public function showRegistrationForm()
+    {
+        return view('user.register');
+    }
+
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**

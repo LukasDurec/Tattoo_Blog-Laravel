@@ -11,7 +11,7 @@
                 <form action="{{route('login')}}" method="POST">
                     @csrf
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="nickname@google.com">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" id="email" name="email" placeholder="nickname@google.com">
                         <label for="floatingInput">Email address</label>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -31,9 +31,16 @@
                     </div>
                     <p></p>
 
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="row">
+                        <div class = col>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        <div class = col>
+                            <a href="{{route('register')}}">Dont have account? Register now</a>
+                        </div>
+                    </div>
                 </form>
+
             </div>
             <div class="col">
 

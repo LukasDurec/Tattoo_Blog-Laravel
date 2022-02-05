@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\user\UHomeController;
 use App\Http\Controllers\user\UPostController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
