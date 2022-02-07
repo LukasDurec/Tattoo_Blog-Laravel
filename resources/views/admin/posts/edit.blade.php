@@ -17,8 +17,6 @@
                 </div>
             </div>
         </div><!-- /.container-fluid -->
-
-
         <!-- Main content -->
         <div class="card card-primary">
             <div class="card-body">
@@ -28,7 +26,6 @@
                     @endforeach
                 @endif
             </div>
-
             <!-- form start -->
             <form role="form" action="{{route('posts.update',$post->id)}}" method="post"enctype="multipart/form-data" >
                 {{csrf_field()}}

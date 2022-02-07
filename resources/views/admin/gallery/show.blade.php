@@ -1,16 +1,11 @@
 @extends("admin.layout.app")
-
 @section("headSection")
-
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
-
 @endsection
-
 @section("main-content")
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -29,7 +24,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -56,7 +50,6 @@
                                     </thead>
                                     <tbody>
                                     @foreach($galleries as $gallery)
-
                                         <tr>
                                             <td>{{$loop->index+1}}</td>
                                             <td>{{$gallery->title}}</td>
@@ -76,14 +69,11 @@
                                                     document.getElementById('delete-form-{{$gallery->id}}').submit();
                                                     }else{
                                                     event.preventDefault();}"
-                                                ><span class="fas fa-trash"></span></a></td>
-
+                                                ><span class="fas fa-trash"></span></a>
+                                            </td>
                                         </tr>
-
                                     @endforeach
-
                                     </tbody>
-
                                 </table>
                             </div>
                             <!-- /.card-body -->

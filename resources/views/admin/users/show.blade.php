@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item">Admin</li>
+                            <li class="breadcrumb-item">Home</li>
                             <li class="breadcrumb-item active">Profile</li>
                         </ol>
                     </div>
@@ -34,7 +34,6 @@
                                 {{$user->name}}
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col">
                                 <strong>Email:</strong>

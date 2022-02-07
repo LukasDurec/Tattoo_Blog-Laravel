@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -15,16 +16,16 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
-
     /**
-     * Register any authentication / authorization services.
+     * Register any authentication / authorization services. MY GATES DONT WORK FOR UNKNOWN REASONS
      *
      * @return void
      */
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        Gate::define('own_gallery',function ($id){
+            return Auth::user()->id === $id;
+        });
     }
 }

@@ -42,7 +42,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            "title"=>"required",
+            "title"=>"required|max:255|unique:posts",
             "subtitle"=>"required",
             "body"=>"required",
             "image"=>"required|mimes:jpg,png,jpeg",
@@ -85,10 +85,14 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = post::with('tags')->where('id',$id)->first();
-        $tags = tag::all();
-        return view("admin.posts.edit",compact("post","tags"));
-
+        $pomPost = post::where('id',$id)->first();
+        $pomId = $pomPost->posted_by;
+        if(Auth::user()->id === $pomId){
+             $post = post::with('tags')->where('id',$id)->first();
+             $tags = tag::all();
+             return view("admin.posts.edit",compact("post","tags"));
+        }
+        return abort(403);
     }
 
     /**
@@ -100,26 +104,32 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            "title"=>"required",
-            "subtitle"=>"required",
-            "body"=>"required",
-            "image"=>"required",
-        ]);
-        if ($request->hasFile('image')) {
-            $imageName = $request->image->store('public/posts');
+        $pomPost = post::where('id',$id)->first();
+        $pomId = $pomPost->posted_by;
+        if(Auth::user()->id === $pomId){
+            $post = post::find($id);
+            $this->validate($request,[
+                "title"=>"required|max:255|unique:posts,title,'.$post->id",
+                "subtitle"=>"required|max:255",
+                "body"=>"required",
+                "image"=>"required",
+            ]);
+            if ($request->hasFile('image')) {
+                $imageName = $request->image->store('public/posts');
+            }
+
+            $post = post::find($id);
+            $post->image = $imageName;
+            $post->title = $request->title;
+            $post->subtitle = $request->subtitle;
+            $post->content = $request->body;
+            $post->updated_at = now();
+            $post ->save();
+            $post->tags()->sync($request->tags);
+
+            return redirect(route("posts.index"));
         }
-
-        $post = post::find($id);
-        $post->image = $imageName;
-        $post->title = $request->title;
-        $post->subtitle = $request->subtitle;
-        $post->content = $request->body;
-        $post->updated_at = now();
-        $post ->save();
-        $post->tags()->sync($request->tags);
-
-        return redirect(route("posts.index"));
+        return abort(403);
     }
 
 
@@ -131,7 +141,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        post::where("id",$id)->delete();
-        return redirect()->back();
+        $pomPost = post::where('id',$id)->first();
+        $pomId = $pomPost->posted_by;
+        if(Auth::user()->id === $pomId){
+            post::where("id",$id)->delete();
+            return redirect()->back();
+        }
+        return abort(403);
     }
 }

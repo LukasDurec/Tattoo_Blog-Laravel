@@ -31,7 +31,8 @@
 
             <!-- form start -->
             <form role="form" action="{{route('gallery.update',$gallery->id)}}" method="post" enctype="multipart/form-data">
-                @csrf
+                {{csrf_field()}}
+                {{method_field('PUT')}}
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">

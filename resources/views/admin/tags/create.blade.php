@@ -36,14 +36,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Tag Name</label>
-                                <input type="text" class="form-control" name="tagname" id="tag-name" placeholder="Tag Name">
+                                <input type="text" class="form-control" name="name" id="tag-name" placeholder="Tag Name" required>
                             </div>
                         </div>
                     </div>
 
                     <div>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a type="button" href="" class="btn btn-warning">Back</a>
+                        <a type="button" href="{{route("tags.index")}}" class="btn btn-warning">Back</a>
                     </div>
 
                 </div>

@@ -1,16 +1,11 @@
 @extends("admin.layout.app")
-
 @section("headSection")
-
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
-
 @endsection
-
 @section("main-content")
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -29,8 +24,6 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
-
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -56,7 +49,6 @@
                                     </thead>
                                     <tbody>
                                     @foreach($posts as $post)
-
                                         <tr>
                                             <td>{{$loop->index+1}}</td>
                                             <td>{{$post->title}}</td>
@@ -68,7 +60,6 @@
                                                     {{csrf_field()}}
                                                     {{method_field('DELETE')}}
                                                 </form>
-
                                                 <a href="" onclick="
                                                     if (confirm('Are you sure u want to delete this magnificent post?')){
                                                     event.preventDefault();
@@ -76,25 +67,16 @@
                                                     }else{
                                                     event.preventDefault();}"
                                                 ><span class="fas fa-trash"></span></a></td>
-
                                         </tr>
-
                                     @endforeach
-
                                     </tbody>
-
                                 </table>
                             </div>
-                            <!-- /.card-body -->
-                        </div>                <!-- /.col -->
+                        </div>
                     </div>
-                    <!-- /.row -->
                 </div>
             </div>
-            <!-- /.container-fluid -->
         </section>
-
-
         @section("footerSection")
     </div>
     <!-- DataTables  & Plugins -->
@@ -104,8 +86,6 @@
     <script src="{{asset('admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/jszip/jszip.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/pdfmake/pdfmake.min.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>

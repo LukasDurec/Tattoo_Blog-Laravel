@@ -38,17 +38,17 @@
 
                             <div class="form-group">
                                 <label for="title">Picture Title</label>
-                                <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+                                <input type="text" class="form-control" name="title" id="title" placeholder="Title" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="title">Picture Subtitle</label>
-                                <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Subtitle">
+                                <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Subtitle"required>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputFile">Picure</label>
-                                <input type="file" class="form-control-file" id="image" name="image">
+                                <input type="file" class="form-control-file" id="image" name="image" required>
                                 <p>Only formats jpg and png</p>
                             </div>
 
@@ -58,7 +58,7 @@
 
                             <div class="form-group">
                                 <label for="author">Picture Author</label>
-                                <input type="text" class="form-control" name="author" id="author" placeholder="Author">
+                                <input type="text" class="form-control" name="author" id="author" placeholder="Author" required>
                             </div>
 
                             <div class="form-group">

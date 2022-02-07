@@ -69,4 +69,8 @@
         text-align: center;
         color: whitesmoke;
     }
+
+    #titulok{
+        color: white;
+    }
 </style>

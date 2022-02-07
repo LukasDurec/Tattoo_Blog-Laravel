@@ -1,6 +1,6 @@
 @extends('user/app')
 
-<!-- Pridaj obrazok-->
+@section('bg-img',asset('user/img/gallery.jpg'))
 
 @section('title','Gallery')
 
@@ -9,7 +9,6 @@
 @section('main-content')
         <div class="container">
             <div class="row row-cols-3">
-
                 @foreach($galleries as $gallery)
                     <div class="responsive">
                         <div class="gallery">

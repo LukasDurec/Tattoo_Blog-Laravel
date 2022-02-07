@@ -5,7 +5,6 @@
     <div class="container">
         <div class="row">
             <div class="col">
-
             </div>
             <div class="col-6">
                 <form action="{{route('login')}}" method="POST">
@@ -43,13 +42,7 @@
 
             </div>
             <div class="col">
-
             </div>
         </div>
-
     </div>
-
-
-
-    </body>
 @endsection

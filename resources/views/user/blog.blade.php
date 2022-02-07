@@ -1,10 +1,12 @@
 @extends("user.app")
-
+@section('bg-img',asset('user/img/blog.jpg'))
 @section('title','Blog')
 @section('main-content')
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="col-2">
+            </div>
+                <div class="col-8">
                 @foreach($posts as $post)
                     <div class="post-preview">
                         <a href="{{route('post',$post->id)}}">
@@ -15,16 +17,14 @@
                                 {{$post->subtitle}}
                             </h3>
                         </a>
-                        <p class="post-meta">Posted by
-                            <a href="#">Lukas Durec</a>
-                            on {{$post->created_at}}</p>
+                        <p class="post-meta">Posted on {{$post->created_at}}</p>
                     </div>
                 @endforeach
+                    <div class="col-2">
+                    </div>
                 <hr>
             </div>
         </div>
     </div>
     <hr>
 @endsection
-
-

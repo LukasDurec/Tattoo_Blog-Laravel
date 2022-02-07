@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\gallery;
 use App\Models\tag;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,8 +44,8 @@ class GalleryController extends Controller
     {
         {
             $this->validate($request,[
-                "title"=>"required",
-                "subtitle"=>"required",
+                "title"=>"required|unique:galleries|max:255",
+                "subtitle"=>"required|max:255",
                 "author"=>"required",
                 "image"=>"required",
 
@@ -87,9 +88,14 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        $gallery = gallery::with('tags')->where('id',$id)->first();
-        $tags = tag::all();
-        return view("admin.gallery.edit",compact("gallery","tags"));
+        $pomGallery = gallery::where('id',$id)->first();
+        $pomId = $pomGallery->posted_by;
+        if(Auth::user()->id === $pomId){
+            $gallery = gallery::with('tags')->where('id',$id)->first();
+            $tags = tag::all();
+            return view("admin.gallery.edit",compact("gallery","tags"));
+        }
+       return abort(403);
     }
 
     /**
@@ -101,10 +107,14 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $gallery = gallery::find($id);
+        $pomGallery = gallery::where('id',$id)->first();
+        $pomId = $pomGallery->posted_by;
+        if(Auth::user()->id === $pomId)
         {
             $this->validate($request,[
-                "title"=>"required",
-                "subtitle"=>"required",
+                "title"=>"required|max:255|unique:galleries,title,'.$gallery->id",
+                "subtitle"=>"required|max:255",
                 "author"=>"required",
                 "image"=>"required",
 
@@ -113,7 +123,7 @@ class GalleryController extends Controller
                 $imageName = $request->image->store('public/gallery');
             }
 
-            $gallery = find($id);
+            $gallery = gallery::find($id);
             $gallery->image = $imageName;
             $gallery->title = $request->title;
             $gallery->subtitle = $request->subtitle;
@@ -125,6 +135,7 @@ class GalleryController extends Controller
 
             return redirect(route("gallery.index"));
         }
+        return abort(403);
     }
 
     /**
@@ -135,7 +146,12 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        gallery::where("id",$id)->delete();
-        return redirect()->back();
+        $pomGallery = gallery::where('id',$id)->first();
+        $pomId = $pomGallery->posted_by;
+        if(Auth::user()->id === $pomId){
+            gallery::where("id",$id)->delete();
+            return redirect()->back();
+        }
+        return abort(403);
     }
 }

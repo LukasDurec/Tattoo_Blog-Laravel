@@ -15,7 +15,7 @@
                     <small>Created at {{$post->created_at}}</small>
                     @foreach($post->tags as $tag)
                         <a href="{{ route('tag',$tag->id) }}">
-                            <small class="tags">
+                            <small id="boxTag">
                                 {{$tag->name}}
                             </small>
                         </a>
@@ -26,7 +26,5 @@
             </div>
         </div>
     </article>
-
     <hr>
-
 @endsection
