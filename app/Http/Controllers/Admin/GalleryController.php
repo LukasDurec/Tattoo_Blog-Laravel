@@ -118,9 +118,9 @@ class GalleryController extends Controller
             $gallery->title = $request->title;
             $gallery->subtitle = $request->subtitle;
             $gallery->author = $request->author;
-            $gallery->created_at = now();
+            $gallery->updated_at = now();
             $gallery ->save();
-            //$post->tags()->sync($request->tags);
+            $gallery->tags()->sync($request->tags);
 
 
             return redirect(route("gallery.index"));
