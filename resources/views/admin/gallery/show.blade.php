@@ -50,7 +50,6 @@
                                         <th>Subitle</th>
                                         <th>Author</th>
                                         <th>Created</th>
-                                        <th>Preview</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -64,7 +63,6 @@
                                             <td>{{$gallery->subtitle}}</td>
                                             <td>{{$gallery->author}}</td>
                                             <td>{{$gallery->created_at}}</td>
-                                            <td> <a href="#"> Prewiew ></a> </td>
                                             <td><a href="{{route("gallery.edit",$gallery->id)}}"><span class="fas fa-edit"></span></a></td>
                                             <td>
                                                 <form id='delete-form-{{$gallery->id}}' method="post" action="{{route("gallery.destroy",$gallery->id)}}" style="display: none">

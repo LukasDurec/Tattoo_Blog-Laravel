@@ -68,7 +68,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}">
+                                            <input type="text" class="form-control" name="name" id="name" value="{{$user->name}} required">
                                             <span class="text-danger error-text name_error"></span>
                                         </div>
 
@@ -78,7 +78,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}">
+                                            <input type="email" class="form-control" name="email" id="email" value="{{$user->email}} required">
                                             <span class="text-danger error-text email_error"></span>
                                         </div>
 

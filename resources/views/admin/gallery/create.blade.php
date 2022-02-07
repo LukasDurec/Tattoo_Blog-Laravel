@@ -49,6 +49,7 @@
                             <div class="form-group">
                                 <label for="exampleInputFile">Picure</label>
                                 <input type="file" class="form-control-file" id="image" name="image">
+                                <p>Only formats jpg and png</p>
                             </div>
 
                         </div>
