@@ -45,11 +45,6 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#changePassword">
-                                    Change password
-                                </button>
-                            </div>
-                            <div class="col">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfile">
                                     Edit
                                 </button>
@@ -59,24 +54,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="modal fade" id="changePassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Change password</h5>
-                        </div>
-                        <div class="modal-body">
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Understood</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="modal fade" id="editProfile" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -92,6 +69,7 @@
                                         <div class="form-group">
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}">
+                                            <span class="text-danger error-text name_error"></span>
                                         </div>
 
                                     </div>
@@ -101,6 +79,7 @@
                                         <div class="form-group">
                                             <label for="name">Email</label>
                                             <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}">
+                                            <span class="text-danger error-text email_error"></span>
                                         </div>
 
                                     </div>
@@ -134,6 +113,9 @@
                         processData:false,
                         dataType:'json',
                         contentType:false,
+                        beforeSend:function(){
+                            $(form).find('span.error-text').text('');
+                        },
                         success: function(data){
                             if(data.code == 0){
                                 $.each(data.error, function(prefix, val){

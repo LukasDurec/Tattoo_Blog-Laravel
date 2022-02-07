@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,15 +73,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            "name"=>'required',
-            "email"=>'required'
-        ]);
         $user = User::find($id);
+        $validator = Validator::make($request->all(),[
+            'name'=>'required|unique:users,name,'.$user->id,
+            'email'=>'required|unique:users,email,'.$user->id,
+        ]);
+        if(!$validator->passes()){
+            return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
+        }else{
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
-        return response()->json(['code'=>1, 'msg'=>'Country Details have Been updated']);
+            return response()->json(['code'=>1, 'msg'=>'Edited']);
+        }
     }
 
     /**
