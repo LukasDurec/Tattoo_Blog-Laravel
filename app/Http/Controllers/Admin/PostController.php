@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\post;
 use App\Models\tag;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -16,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = post::all();
+        $posts = Auth::user()->posts;
         return view("admin.posts.show",compact("posts"));
     }
 
@@ -43,7 +45,7 @@ class PostController extends Controller
             "title"=>"required",
             "subtitle"=>"required",
             "body"=>"required",
-            "image"=>"required",
+            "image"=>"required|mimes:jpg,png,jpeg",
 
         ]);
         if ($request->hasFile('image')) {
@@ -56,6 +58,7 @@ class PostController extends Controller
         $post->subtitle = $request->subtitle;
         $post->content = $request->body;
         $post->created_at = now();
+        $post->posted_by = Auth::user()->id;
         $post ->save();
         $post->tags()->sync($request->tags);
 
@@ -112,7 +115,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
         $post->content = $request->body;
-        $post->created_at = now();
+        $post->updated_at = now();
         $post ->save();
         $post->tags()->sync($request->tags);
 

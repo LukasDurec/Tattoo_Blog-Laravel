@@ -1,14 +1,5 @@
 @extends("admin.layout.app")
 
-@section("headSection")
-
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
-
-@endsection
-
 @section("main-content")
 
     <!-- Content Wrapper. Contains page content -->
@@ -18,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Users</h1>
+                        <h1>Profile</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item">Home</li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item">Admin</li>
+                            <li class="breadcrumb-item active">Profile</li>
                         </ol>
                     </div>
                 </div>
@@ -33,93 +24,135 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">User list</h3>
+                <div class="card w-25" >
+                    <div class="card-body" id="profileInfo">
+                        <div class="row">
+                            <div class="col">
+                                <strong>Name:</strong>
                             </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <a class="btn btn-success" href="{{route("user.create")}}" role="button"> Add post</a>
-                                <table id="tabulkaPost" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Title</th>
-                                        <th>Subitle</th>
-                                        <th>Created</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($users as $user)
-
-                                        <tr>
-                                            <td>{{$loop->index+1}}</td>
-                                            <td>{{$post->title}}</td>
-                                            <td>{{$post->subtitle}}</td>
-                                            <td>{{$post->created_at}}</td>
-                                            <td><a href="{{route("posts.edit",$post->id)}}"><span class="fas fa-edit"></span></a></td>
-                                            <td>
-                                                <form id='delete-form-{{$post->id}}' method="post" action="{{route("posts.destroy",$post->id)}}" style="display: none">
-                                                    {{csrf_field()}}
-                                                    {{method_field('DELETE')}}
-                                                </form>
-
-                                                <a href="" onclick="
-                                                    if (confirm('Are you sure u want to delete this magnificent post?')){
-                                                    event.preventDefault();
-                                                    document.getElementById('delete-form-{{$post->id}}').submit();
-                                                    }else{
-                                                    event.preventDefault();}"
-                                                ><span class="fas fa-trash"></span></a></td>
-
-                                        </tr>
-
-                                    @endforeach
-
-                                    </tbody>
-
-                                </table>
+                            <div class="col">
+                                {{$user->name}}
                             </div>
-                            <!-- /.card-body -->
-                        </div>                <!-- /.col -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <strong>Email:</strong>
+                            </div>
+                            <div class="col">
+                                {{$user->email}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#changePassword">
+                                    Change password
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfile">
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
-                    <!-- /.row -->
                 </div>
             </div>
-            <!-- /.container-fluid -->
+
+            <div class="modal fade" id="changePassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Change password</h5>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editProfile" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Edit profile</h5>
+                        </div>
+                        <form action="{{route('users.update',$user->id)}}" method="post" id="edit-Profile">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Email</label>
+                                            <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $.ajaxSetup({
+                headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                }
+                });
+
+                //edituj meno a email
+                $('#edit-Profile').on('submit', function(e){
+                    e.preventDefault();
+                    var form = this;
+                    $.ajax({
+                        url:$(form).attr('action'),
+                        method:$(form).attr('method'),
+                        data:new FormData(form),
+                        processData:false,
+                        dataType:'json',
+                        contentType:false,
+                        success: function(data){
+                            if(data.code == 0){
+                                $.each(data.error, function(prefix, val){
+                                    $(form).find('span.'+prefix+'_error').text(val[0]);
+                                });
+                            }else{
+                                $("#profileInfo").load(location.href + " #profileInfo");
+                                $('#editProfile').modal('hide');
+                            }
+                        }
+                    });
+                });
+
+            </script>
+
+
         </section>
-
-
-        @section("footerSection")
     </div>
-    <!-- DataTables  & Plugins -->
-    <script src="{{asset('admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/jszip/jszip.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/pdfmake/pdfmake.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 
-    <script>
-        $(function () {
-            $("#tabulkaPost").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-@endsection
-<!-- /.content-wrapper -->
 
 @endsection
 

@@ -18,9 +18,10 @@ class CreateGaleriesTable extends Migration
             $table->string('title');
             $table->string('subtitle');
             $table->string('author');
-            $table->integer('posted_by')->nullable();
+            $table->integer('posted_by')->unsigned();
             $table->string('image');
             $table->timestamps();
+            $table->foreign('posted_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -15,4 +15,8 @@ class post extends Model
     {
         return 'id';
     }
+
+    public function user(){
+        return $this->belongsTo('App/Models/User','posted_by');
+    }
 }

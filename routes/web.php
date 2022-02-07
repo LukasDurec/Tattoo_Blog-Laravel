@@ -33,15 +33,15 @@ Route::get('/gallery',[UHomeController::class,'gallery'])->name("gallery");
 //Admin cast
 
 //POST
-Route::resource('admin/posts',PostController::class);
+Route::resource('admin/posts',PostController::class)->middleware('auth');
 //TAG
-Route::resource('admin/tags',TagController::class);
+Route::resource('admin/tags',TagController::class)->middleware('auth');
 //Gallery
-Route::resource('admin/gallery',GalleryController::class);
+Route::resource('admin/gallery',GalleryController::class)->middleware('auth');
 //HOME
-Route::get('admin/home',[HomeController::class,'index'])->name("admin.home");
+Route::get('admin/home',[HomeController::class,'index'])->name("admin.home")->middleware('auth');
 //USER
-Route::resource('admin/users',UserController::class);
+Route::resource('admin/users',UserController::class)->middleware('auth');
 
 Auth::routes();
 

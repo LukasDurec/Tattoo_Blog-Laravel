@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\gallery;
 use App\Models\tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GalleryController extends Controller
 {
@@ -16,7 +17,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = gallery::all();
+        $galleries = Auth::user()->galleries;
         return view("admin.gallery.show",compact("galleries"));
     }
 
@@ -57,6 +58,7 @@ class GalleryController extends Controller
             $gallery->title = $request->title;
             $gallery->subtitle = $request->subtitle;
             $gallery->author = $request->author;
+            $gallery->posted_by = Auth::user()->id;
             $gallery->created_at = now();
             $gallery ->save();
             $gallery->tags()->sync($request->tags);
@@ -111,7 +113,7 @@ class GalleryController extends Controller
                 $imageName = $request->image->store('public/gallery');
             }
 
-            $gallery = new gallery();
+            $gallery = find($id);
             $gallery->image = $imageName;
             $gallery->title = $request->title;
             $gallery->subtitle = $request->subtitle;
